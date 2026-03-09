@@ -50,21 +50,48 @@
 
             <article id="projet-ecommerce" style="margin-top: 2rem; border: 2px solid #3d5afe;">
                 <header>
-                    <strong>Cas d'école : Tracking E-commerce Avancé</strong>
+                    <strong>Cas d'école : Tracking Catalogue Multi-Produits</strong>
                 </header>
-                <p>Ce module simule un tunnel de vente. L'objectif est de démontrer ma capacité à configurer une <strong>Data Layer</strong> pour remonter des données transactionnelles (prix, devise, ID produit) sans faille.</p>
+                <p>Ce module démontre la gestion d'un catalogue dynamique et l'analyse de performance par produit via la <strong>Data Layer</strong>.</p>
                 
                 <blockquote style="background-color: #f1f3f4; border-left: 5px solid #3d5afe;">
-                    🔒 <strong>Note de test :</strong> Ceci est une simulation. Aucune donnée personnelle ou bancaire n'est demandée. Aucun paiement réel n'est effectué.
+                    🔒 <strong>Note de test :</strong> Simulation sans transaction réelle ni collecte de données.
                 </blockquote>
 
                 <div class="grid">
-                    <button class="secondary" id="view-btn">1. Voir le produit</button>
-                    <button id="add-to-cart-btn">2. Simuler l'ajout au panier</button>
+                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+                        <small>Audit</small>
+                        <p><strong>Audit SEO</strong><br>400€</p>
+                        <button id="add-audit-seo" size="small">Ajouter</button>
+                    </aside>
+                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+                        <small>Audit</small>
+                        <p><strong>Audit GA4</strong><br>500€</p>
+                        <button id="add-audit-ga4">Ajouter</button>
+                    </aside>
+                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+                        <small>Config</small>
+                        <p><strong>Setup GTM</strong><br>300€</p>
+                        <button id="add-setup-gtm">Ajouter</button>
+                    </aside>
+                </div>
+
+                <div class="grid" style="margin-top: 1rem;">
+                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+                        <small>Formation</small>
+                        <p><strong>Coach GTM</strong><br>150€</p>
+                        <button id="add-coach-gtm">Ajouter</button>
+                    </aside>
+                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+                        <small>Formation</small>
+                        <p><strong>Coach GA4</strong><br>150€</p>
+                        <button id="add-coach-ga4">Ajouter</button>
+                    </aside>
+                    <div></div>
                 </div>
                 
-                <footer style="text-align: center;">
-                    <a href="thanks.html" role="button" class="outline" id="purchase-btn">3. Valider la commande fictive (500€)</a>
+                <footer style="text-align: center; margin-top: 2rem;">
+                    <a href="thanks.html" role="button" class="outline" id="purchase-btn">Valider le panier global</a>
                 </footer>
             </article>
         </section>
