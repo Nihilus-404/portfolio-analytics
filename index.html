@@ -100,5 +100,37 @@
             <small>Propulsé par GitHub Pages & Passion Analytics</small>
         </footer>
     </main>
+    <script>
+  // Initialisation de la Data Layer si elle n'existe pas
+  window.dataLayer = window.dataLayer || [];
+
+  // Fonction universelle pour ajouter au panier
+  function trackAdd(id, name, price, category) {
+    window.dataLayer.push({
+      'event': 'add_to_cart',
+      'ecommerce': {
+        'currency': 'EUR',
+        'value': price,
+        'items': [{
+          'item_id': id,
+          'item_name': name,
+          'price': price,
+          'item_category': category,
+          'quantity': 1
+        }]
+      }
+    });
+    // Petite alerte visuelle pour confirmer le test
+    console.log("🛒 DataLayer Push : " + name + " (" + price + "€)");
+    alert(name + " ajouté au panier (DataLayer envoyé) !");
+  }
+
+  // Écouteurs de clics pour tes 5 produits
+  document.getElementById('add-audit-seo').onclick = function() { trackAdd('SRV-01', 'Audit SEO', 400, 'Audit'); };
+  document.getElementById('add-audit-ga4').onclick = function() { trackAdd('SRV-02', 'Audit GA4', 500, 'Audit'); };
+  document.getElementById('add-setup-gtm').onclick = function() { trackAdd('SRV-03', 'Setup GTM', 300, 'Config'); };
+  document.getElementById('add-coach-gtm').onclick = function() { trackAdd('SRV-04', 'Coach GTM', 150, 'Formation'); };
+  document.getElementById('add-coach-ga4').onclick = function() { trackAdd('SRV-05', 'Coach GA4', 150, 'Formation'); };
+</script>
 </body>
 </html>
