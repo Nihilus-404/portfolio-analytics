@@ -49,53 +49,66 @@
             </details>
 
             <article id="projet-ecommerce" style="margin-top: 2rem; border: 2px solid #3d5afe;">
-                <header><strong>Cas d'école : Tracking Catalogue & Panier Dynamique</strong></header>
-                <p>Démonstration de la gestion d'un panier avec mise à jour en temps réel de la <strong>Data Layer</strong>.</p>
-                
-                <blockquote style="background-color: #f1f3f4; border-left: 5px solid #3d5afe;">
-                    🔒 <strong>Note :</strong> Simulation sans transaction réelle. Aucun paiement n'est effectué.
-                </blockquote>
+    <header><strong>Cas d'école : Tracking Catalogue & Panier Dynamique</strong></header>
+    <p>Démonstration de la gestion d'un panier avec mise à jour en temps réel de la <strong>Data Layer</strong>.</p>
+    
+    <blockquote style="background-color: #f1f3f4; border-left: 5px solid #3d5afe;">
+        🔒 <strong>Note :</strong> Simulation sans transaction réelle. Aucun paiement n'est effectué.
+    </blockquote>
 
-                <div class="grid">
-                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
-                        <small>Audit</small>
-                        <p><strong>Audit SEO</strong><br>400€</p>
-                        <button id="add-audit-seo">Ajouter</button>
-                    </aside>
-                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
-                        <small>Audit</small>
-                        <p><strong>Audit GA4</strong><br>500€</p>
-                        <button id="add-audit-ga4">Ajouter</button>
-                    </aside>
-                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
-                        <small>Config</small>
-                        <p><strong>Setup GTM</strong><br>300€</p>
-                        <button id="add-setup-gtm">Ajouter</button>
-                    </aside>
-                </div>
+    <div class="grid">
+        <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+            <small>Audit</small>
+            <p><strong>Audit SEO</strong><br>400€</p>
+            <button id="add-audit-seo">Ajouter</button>
+        </aside>
+        <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+            <small>Audit</small>
+            <p><strong>Audit GA4</strong><br>500€</p>
+            <button id="add-audit-ga4">Ajouter</button>
+        </aside>
+        <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+            <small>Config</small>
+            <p><strong>Setup GTM</strong><br>300€</p>
+            <button id="add-setup-gtm">Ajouter</button>
+        </aside>
+    </div>
 
-                <div id="votre-panier" style="margin-top: 2rem; padding: 1rem; background: #fafafa; border-radius: 8px; border: 1px dashed #3d5afe;">
-                    <h5 style="color: #1a1a1a;">🛒 Votre Panier (fictif)</h5>
-                    <ul id="cart-list" style="list-style-type: none; padding-left: 0;">
-                        <li id="empty-msg">Votre panier est vide.</li>
-                    </ul>
-                    <hr>
-                    <p><strong>Total : <span id="cart-total">0</span>€</strong></p>
-                    
-                    <div class="grid">
-                        <button class="outline contrast" id="clear-cart-btn" style="font-size: 0.8rem;">Vider le panier</button>
-                        <a href="thanks.html" role="button" class="outline" id="purchase-btn">Valider la commande</a>
-                    </div>
-                </div>
-            </article>
+    <div class="grid" style="margin-top: 1rem;">
+        <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+            <small>Formation</small>
+            <p><strong>Coach GTM</strong><br>150€</p>
+            <button id="add-coach-gtm">Ajouter</button>
+        </aside>
+        <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
+            <small>Formation</small>
+            <p><strong>Coach GA4</strong><br>150€</p>
+            <button id="add-coach-ga4">Ajouter</button>
+        </aside>
+        <div></div>
+    </div>
+
+    <div id="votre-panier" style="margin-top: 2rem; padding: 1rem; background: #fafafa; border-radius: 8px; border: 1px dashed #3d5afe;">
+        <h5 style="color: #1a1a1a;">🛒 Votre Panier (fictif)</h5>
+        <ul id="cart-list" style="list-style-type: none; padding-left: 0;">
+            <li id="empty-msg">Votre panier est vide.</li>
+        </ul>
+        <hr>
+        <p><strong>Total : <span id="cart-total">0</span>€</strong></p>
+        
+        <div class="grid">
+            <button class="outline contrast" id="clear-cart-btn" style="font-size: 0.8rem;">Vider le panier</button>
+            <a href="thanks.html" role="button" class="outline" id="purchase-btn">Valider la commande</a>
+        </div>
+    </div>
+</article>
         </section>
 
         <footer>
             <small>Propulsé par GitHub Pages & Passion Analytics</small>
         </footer>
     </main>
-    <script>
-  <script>
+   <script>
   window.dataLayer = window.dataLayer || [];
   let cart = [];
 
