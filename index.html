@@ -49,20 +49,18 @@
             </details>
 
             <article id="projet-ecommerce" style="margin-top: 2rem; border: 2px solid #3d5afe;">
-                <header>
-                    <strong>Cas d'école : Tracking Catalogue Multi-Produits</strong>
-                </header>
-                <p>Ce module démontre la gestion d'un catalogue dynamique et l'analyse de performance par produit via la <strong>Data Layer</strong>.</p>
+                <header><strong>Cas d'école : Tracking Catalogue & Panier Dynamique</strong></header>
+                <p>Démonstration de la gestion d'un panier avec mise à jour en temps réel de la <strong>Data Layer</strong>.</p>
                 
                 <blockquote style="background-color: #f1f3f4; border-left: 5px solid #3d5afe;">
-                    🔒 <strong>Note de test :</strong> Simulation sans transaction réelle ni collecte de données.
+                    🔒 <strong>Note :</strong> Simulation sans transaction réelle. Aucun paiement n'est effectué.
                 </blockquote>
 
                 <div class="grid">
                     <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
                         <small>Audit</small>
                         <p><strong>Audit SEO</strong><br>400€</p>
-                        <button id="add-audit-seo" size="small">Ajouter</button>
+                        <button id="add-audit-seo">Ajouter</button>
                     </aside>
                     <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
                         <small>Audit</small>
@@ -76,23 +74,19 @@
                     </aside>
                 </div>
 
-                <div class="grid" style="margin-top: 1rem;">
-                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
-                        <small>Formation</small>
-                        <p><strong>Coach GTM</strong><br>150€</p>
-                        <button id="add-coach-gtm">Ajouter</button>
-                    </aside>
-                    <aside style="padding: 1rem; border: 1px solid #e0e0e0;">
-                        <small>Formation</small>
-                        <p><strong>Coach GA4</strong><br>150€</p>
-                        <button id="add-coach-ga4">Ajouter</button>
-                    </aside>
-                    <div></div>
+                <div id="votre-panier" style="margin-top: 2rem; padding: 1rem; background: #fafafa; border-radius: 8px; border: 1px dashed #3d5afe;">
+                    <h5 style="color: #1a1a1a;">🛒 Votre Panier (fictif)</h5>
+                    <ul id="cart-list" style="list-style-type: none; padding-left: 0;">
+                        <li id="empty-msg">Votre panier est vide.</li>
+                    </ul>
+                    <hr>
+                    <p><strong>Total : <span id="cart-total">0</span>€</strong></p>
+                    
+                    <div class="grid">
+                        <button class="outline contrast" id="clear-cart-btn" style="font-size: 0.8rem;">Vider le panier</button>
+                        <a href="thanks.html" role="button" class="outline" id="purchase-btn">Valider la commande</a>
+                    </div>
                 </div>
-                
-                <footer style="text-align: center; margin-top: 2rem;">
-                    <a href="thanks.html" role="button" class="outline" id="purchase-btn">Valider le panier global</a>
-                </footer>
             </article>
         </section>
 
@@ -101,36 +95,91 @@
         </footer>
     </main>
     <script>
-  // Initialisation de la Data Layer si elle n'existe pas
+  <script>
   window.dataLayer = window.dataLayer || [];
+  let cart = [];
 
-  // Fonction universelle pour ajouter au panier
-  function trackAdd(id, name, price, category) {
-    window.dataLayer.push({
-      'event': 'add_to_cart',
-      'ecommerce': {
-        'currency': 'EUR',
-        'value': price,
-        'items': [{
-          'item_id': id,
-          'item_name': name,
-          'price': price,
-          'item_category': category,
-          'quantity': 1
-        }]
-      }
-    });
-    
-    // On garde uniquement une trace dans la console pour tes tests techniques
-    console.log("🛒 DataLayer Push : " + name + " (" + price + "€)");
+  // Mise à jour de l'interface du panier
+  function updateCartUI() {
+      const list = document.getElementById('cart-list');
+      const totalEl = document.getElementById('cart-total');
+      let total = 0;
+      list.innerHTML = cart.length === 0 ? '<li>Votre panier est vide.</li>' : '';
+      cart.forEach((item, index) => {
+          const li = document.createElement('li');
+          li.style.display = "flex";
+          li.style.justifyContent = "between";
+          li.innerHTML = `<span>${item.name} - ${item.price}€</span><a href="#" onclick="removeFromCart(${index}); return false;" style="color:red; margin-left:auto;">[Supprimer]</a>`;
+          list.appendChild(li);
+          total += item.price;
+      });
+      totalEl.innerText = total;
   }
 
-  // Écouteurs de clics pour tes 5 produits
-  document.getElementById('add-audit-seo').onclick = function() { trackAdd('SRV-01', 'Audit SEO', 400, 'Audit'); };
-  document.getElementById('add-audit-ga4').onclick = function() { trackAdd('SRV-02', 'Audit GA4', 500, 'Audit'); };
-  document.getElementById('add-setup-gtm').onclick = function() { trackAdd('SRV-03', 'Setup GTM', 300, 'Config'); };
-  document.getElementById('add-coach-gtm').onclick = function() { trackAdd('SRV-04', 'Coach GTM', 150, 'Formation'); };
-  document.getElementById('add-coach-ga4').onclick = function() { trackAdd('SRV-05', 'Coach GA4', 150, 'Formation'); };
+  // Fonction ajouter au panier
+  function addToCart(id, name, price, category) {
+      const product = { id, name, price, category };
+      cart.push(product);
+      window.dataLayer.push({
+          'event': 'add_to_cart',
+          'ecommerce': {
+              'currency': 'EUR',
+              'value': price,
+              'items': [{ 'item_id': id, 'item_name': name, 'price': price, 'item_category': category, 'quantity': 1 }]
+          }
+      });
+      console.log("🛒 DataLayer Add : " + name);
+      updateCartUI();
+  }
+
+  // Fonction supprimer un article
+  window.removeFromCart = function(index) {
+      const item = cart[index];
+      cart.splice(index, 1);
+      window.dataLayer.push({
+          'event': 'remove_from_cart',
+          'ecommerce': {
+              'currency': 'EUR',
+              'value': item.price,
+              'items': [{ 'item_id': item.id, 'item_name': item.name, 'price': item.price }]
+          }
+      });
+      console.log("❌ DataLayer Remove : " + item.name);
+      updateCartUI();
+  };
+
+  // Fonction vider le panier
+  document.getElementById('clear-cart-btn').onclick = function() {
+      cart = [];
+      updateCartUI();
+      console.log("🗑️ Panier vidé");
+  };
+
+  // Fonction achat (Validation finale)
+  document.getElementById('purchase-btn').onclick = function(e) {
+      if (cart.length === 0) {
+          e.preventDefault();
+          alert("Votre panier est vide ! Ajoutez un service pour tester.");
+          return;
+      }
+      const totalValue = cart.reduce((sum, item) => sum + item.price, 0);
+      window.dataLayer.push({
+          'event': 'purchase',
+          'ecommerce': {
+              'transaction_id': 'T_' + Math.floor(Math.random() * 100000),
+              'value': totalValue,
+              'currency': 'EUR',
+              'items': cart.map(item => ({ 'item_id': item.id, 'item_name': item.name, 'price': item.price }))
+          }
+      });
+  };
+
+  // Écouteurs d'événements pour les produits
+  document.getElementById('add-audit-seo').onclick = () => addToCart('SRV-01', 'Audit SEO', 400, 'Audit');
+  document.getElementById('add-audit-ga4').onclick = () => addToCart('SRV-02', 'Audit GA4', 500, 'Audit');
+  document.getElementById('add-setup-gtm').onclick = () => addToCart('SRV-03', 'Setup GTM', 300, 'Config');
+  document.getElementById('add-coach-gtm').onclick = () => addToCart('SRV-04', 'Coach GTM', 150, 'Formation');
+  document.getElementById('add-coach-ga4').onclick = () => addToCart('SRV-05', 'Coach GA4', 150, 'Formation');
 </script>
 </body>
 </html>
